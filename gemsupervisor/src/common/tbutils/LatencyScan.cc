@@ -48,10 +48,10 @@ void gem::supervisor::tbutils::LatencyScan::ConfigParams::registerFields(xdata::
   MSPulseLength = 3;
   VCal          = 100;
 
-
+  /*
   bag->addField("ExternalTrigger",    &externaltrigger);
   bag->addField("InternalTrigger",    &internaltrigger);
-
+  */
   bag->addField("minLatency",    &minLatency   );
   bag->addField("maxLatency",    &maxLatency   );
   bag->addField("stepSize",      &stepSize     );
@@ -83,15 +83,20 @@ gem::supervisor::tbutils::LatencyScan::LatencyScan(xdaq::ApplicationStub * s)  t
   currentLatency_ = 0;
 
   scanpoint_ = true; // never initialized
+  
+  
   /*
   confParams_.bag.useLocalTriggers   = false;
   confParams_.bag.localTriggerMode   = 0;
   confParams_.bag.localTriggerPeriod = 1;
   */
+  /*
+  m_externaltrigger  =   true;
+ m_internaltrigger  =   false;
 
   m_externaltrigger  =   scanParams_.bag.externaltrigger;
   m_internaltrigger  =   scanParams_.bag.internaltrigger;
-
+  
   if(m_externaltrigger){
     confParams_.bag.useLocalTriggers   = false;
     confParams_.bag.localTriggerMode   = 0; // per orbit
@@ -105,7 +110,12 @@ gem::supervisor::tbutils::LatencyScan::LatencyScan(xdaq::ApplicationStub * s)  t
     confParams_.bag.EnableTrigCont     = true;
     confParams_.bag.localTriggerPeriod = 1;
   }
-
+  */
+  //  confParams_.bag.useLocalTriggers   = true;
+  //  confParams_.bag.localTriggerMode   = 0; // per orbit
+  //  confParams_.bag.EnableTrigCont     = true;
+  //  confParams_.bag.localTriggerPeriod = 1;
+  // confParams_.bag.enableLEMOTrigger = false;
 
 
   disableTriggers();
@@ -237,7 +247,7 @@ bool gem::supervisor::tbutils::LatencyScan::run(toolbox::task::WorkLoop* wl)
 	scanParams_.bag.deviceVT1 = (*chip)->getVThreshold1();
 	scanParams_.bag.deviceVT2 = (*chip)->getVThreshold2();
       }
-      while ((glibDevice_->readReg(glibDevice_->getDeviceBaseNode(),
+      while (!(glibDevice_->readReg(glibDevice_->getDeviceBaseNode(),
                                     toolbox::toString("DAQ.GTX%d.STATUS.EVENT_FIFO_IS_EMPTY",
                                                       confParams_.bag.ohGTXLink.value_))))
 	TRACE("waiting for FIFO is empty: "

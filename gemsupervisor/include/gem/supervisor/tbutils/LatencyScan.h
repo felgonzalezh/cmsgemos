@@ -53,9 +53,9 @@ namespace gem {
 	void registerFields(xdata::Bag<ConfigParams> *bag);
 
 	xdata::String          slotFileName;
-	xdata::Boolean           externaltrigger;
+	/*	xdata::Boolean           externaltrigger;
 	xdata::Boolean           internaltrigger;
-
+	*/
 	xdata::UnsignedShort  stepSize;
 	xdata::UnsignedShort  minLatency;
 	xdata::UnsignedShort  maxLatency;

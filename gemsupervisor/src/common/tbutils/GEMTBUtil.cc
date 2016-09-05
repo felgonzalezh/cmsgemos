@@ -72,7 +72,7 @@ void gem::supervisor::tbutils::GEMTBUtil::ConfigParams::registerFields(xdata::Ba
   bag->addField("LocalTriggerPeriod",  &localTriggerPeriod);
 //  bag->addField("triggerSource",&triggerSource);
   bag->addField("slotFileName",  &slotFileName);
-  bag->addField("enableLEMOTrigger",  &enableLEMOTrigger);
+  bag->addField("EnableLEMOTrigger",  &enableLEMOTrigger);
 
 
 }
